@@ -68,7 +68,7 @@ class CountBased:
 
         if count < avg - std:
             return 1  # 악성
-        elif avg - std*0.1 <= count <= avg + std*0.1:
+        elif avg - std <= count <= avg + std:
             return 0  # 정상
         else:
             return 1 
