@@ -10,6 +10,17 @@ from datetime import datetime
 import logging
 import string
 import re
+import string
+import re
+from sklearn.metrics import f1_score
+import numpy as np
+import ssl
+import socket
+from datetime import datetime, timezone
+from urllib.parse import urlparse
+import idna
+from cryptography import x509
+from cryptography.hazmat.backends import default_backend
 
 
 ###존재기반(HTTPS, 문자열)###
@@ -46,9 +57,18 @@ class LengthBased:
         if length < url_avg - url_std:
             return 1 #악성, 너무 짧음
         elif url_avg - url_std <= length <= url_avg + url_std:
-            return 0 #정상상
+            return 0 #정상
         else:
             return 1 #악성, 너무 김
+        
+
+    @staticmethod
+    def check_length2(url, lower, upper):
+        if pd.isna(url):
+            return None
+        length = len(str(url))
+        return 1 if length < lower or length > upper else 0
+    
     
 ###개수기반(특수문자,숫자,문자)### 
 class CountBased:
@@ -60,6 +80,40 @@ class CountBased:
         if count < avg - std:
             return 1  # 악성
         elif avg - std <= count <= avg + std:
+            return 0  # 정상
+        else:
+            return 1 
+        
+    @staticmethod
+    def check_count_level1(count, avg, std):
+        if pd.isna(count):
+            return None
+
+        if count < avg - std*0.1:
+            return 1  # 악성
+        elif avg - std*0.1 <= count <= avg + std*0.1:
+            return 0  # 정상
+        else:
+            return 1 
+    @staticmethod
+    def check_count_level2(count, avg, std):
+        if pd.isna(count):
+            return None
+
+        if count < avg - std*0.2:
+            return 1  # 악성
+        elif avg - std*0.2 <= count <= avg + std*0.2:
+            return 0  # 정상
+        else:
+            return 1 
+    @staticmethod
+    def check_count_level3(count, avg, std):
+        if pd.isna(count):
+            return None
+
+        if count < avg - std*0.3:
+            return 1  # 악성
+        elif avg - std*0.3 <= count <= avg + std*0.3:
             return 0  # 정상
         else:
             return 1 
@@ -138,6 +192,7 @@ class DaysBased:
 
     #WHOIS에서 날짜 정보 추출 함수
     @staticmethod
+    @lru_cache(maxsize=128)
     def extract_domain_dates(domain_name):
         try:
             whois_info = whois.whois(domain_name)
@@ -193,6 +248,9 @@ class DaysBased:
     @staticmethod
     def label_by_thresholds(row, thresholds):
         score = 0
+        if row['days_since_creation'] is None and row['days_since_update'] is None and row['days_until_expiration'] is None:
+            return 2
+
         if row['days_since_creation'] is not None and row['days_since_creation'] < thresholds['days_since_creation']:
             score += 2
         if row['days_since_update'] is not None and row['days_since_update'] < thresholds['days_since_update']:
@@ -201,9 +259,11 @@ class DaysBased:
             score += 1
 
         # 불확실성 점수 부여 (날짜가 아예 없을 경우)
+        if row['days_since_creation'] is None:
+            score += 1  # 불확실하므로 점수 추가  
         if row['days_since_update'] is None:
             score += 1  # 불확실하므로 점수 추가
-
+          
         return 1 if score >= 3 else 0
     
 
@@ -212,6 +272,7 @@ class DNS:
     @staticmethod
     #DNS특징추출함수
     def get_dns_features_and_judge(url):
+        DNS_mal = None
         try:
             # 도메인 추출
             domain = DaysBased.extract_domain(url)
@@ -227,24 +288,31 @@ class DNS:
 
             # NS에 도메인 이름이 포함되는지 확인
             ns_match = 1 if domain.lower() in primary_ns.lower() else 0
-
             dns_success = 1
 
         except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN, dns.exception.Timeout):
             ttl = -1
             ns_match = -1
             dns_success = 0
+            DNS_mal = 1  
         except Exception as e:
             print(f"⚠️ 기타 오류 발생: {e}")
             ttl = -1
             ns_match = -1
             dns_success = 0
+            DNS_mal = 1  
 
         # 악성 여부 판단
-        DNS_mal = 1 if (ttl == 86400 or ns_match == 0 or dns_success == 0) else 0
-
+        if(DNS_mal==1):
+            pass
+        else:
+            if (ttl == 86400 and ns_match == 0) or \
+            (ttl == 86400 and dns_success == 0) or \
+            (ns_match == 0 and dns_success == 0) or \
+            (ttl == 86400 and ns_match == 0 and dns_success == 0): DNS_mal = 1
+            else: DNS_mal = 0
+            
         return pd.Series([ttl, ns_match, dns_success, DNS_mal])
-
 
 
 
@@ -252,6 +320,80 @@ class DNS:
     
 
 
+#SSL기반
+class SSL:
+    def extract_ssl_features_advanced(url):
+        try:
+            hostname = urlparse(url).hostname
+            if not hostname:
+                raise ValueError('Invalid URL structure')
+            hostname = idna.encode(hostname).decode('ascii')
+            port = 443
 
+            context = ssl.create_default_context()
 
+            with socket.create_connection((hostname, port), timeout=5) as sock:
+                with context.wrap_socket(sock, server_hostname=hostname) as ssock:
+                    der_cert = ssock.getpeercert(binary_form=True)
+                    tls_version = ssock.version() or "unknown"
 
+            cert = x509.load_der_x509_certificate(der_cert, backend=default_backend())
+
+            # CN 정보
+            issuer_cn = cert.issuer.get_attributes_for_oid(x509.NameOID.COMMON_NAME)[0].value \
+                if cert.issuer.get_attributes_for_oid(x509.NameOID.COMMON_NAME) else ""
+            subject_cn = cert.subject.get_attributes_for_oid(x509.NameOID.COMMON_NAME)[0].value \
+                if cert.subject.get_attributes_for_oid(x509.NameOID.COMMON_NAME) else ""
+
+            now = datetime.now(timezone.utc)
+            not_before = cert.not_valid_before_utc
+            not_after = cert.not_valid_after_utc
+            cert_valid_days = (not_after - not_before).days
+
+            # SAN 필드
+            try:
+                ext = cert.extensions.get_extension_for_class(x509.SubjectAlternativeName)
+                san_dns_names = ext.value.get_values_for_type(x509.DNSName)
+                san_count = len(san_dns_names)
+                hostname_in_san = hostname in san_dns_names
+            except:
+                san_dns_names = []
+                san_count = 0
+                hostname_in_san = False
+
+            # CN 또는 SAN 중 하나라도 일치하면 정상
+            domain_mismatch = not (hostname == subject_cn or hostname_in_san)
+
+            # 키 알고리즘
+            pubkey = cert.public_key()
+            if hasattr(pubkey, 'key_size'):
+                key_bits = pubkey.key_size
+                key_algo = f"RSA-{key_bits}" if 'rsa' in pubkey.__class__.__name__.lower() else f"{pubkey.__class__.__name__}-{key_bits}"
+            else:
+                key_algo = "UNKNOWN"
+
+            return {
+                'is_untrusted_ca': int(not any(x in issuer_cn for x in ["Let's Encrypt", "Google", "DigiCert", "GlobalSign",
+                                                                "Amazon", "Microsoft", "GoDaddy", "Sectigo", "GeoTrust",
+                                                                "한국전자인증", "한국정보인증"])),
+                'is_weak_protocol': int(tls_version.lower() in ['sslv3', 'tlsv1', 'tlsv1.1']),
+                'is_weak_key_algo': int(key_algo.startswith('RSA-') and int(key_algo.split('-')[1]) <= 1024),
+                'is_short_lived_cert': int(cert_valid_days < 7),
+                'is_expired': int(now > not_after),
+                'domain_cn_mismatch': int(domain_mismatch),
+                'is_self_signed': int(subject_cn == issuer_cn),
+                'san_count_high': int(san_count > 50)
+            }
+
+        except Exception:
+            # SSL 오류 발생 시 모든 특징을 '1' (악성)으로 간주
+            return {
+                'is_untrusted_ca': 1,
+                'is_weak_protocol': 1,
+                'is_weak_key_algo': 1,
+                'is_short_lived_cert': 1,
+                'is_expired': 1,
+                'domain_cn_mismatch': 1,
+                'is_self_signed': 1,
+                'san_count_high': 1
+            }
