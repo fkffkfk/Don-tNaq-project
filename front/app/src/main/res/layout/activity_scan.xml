@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 카메라 프리뷰 -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 안내 텍스트 -->
+    <TextView
+        android:id="@+id/scanGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR 코드를 화면 중앙에 맞춰주세요"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="32dp"/>
+
+    <!-- 스캔 박스 -->
+    <View
+        android:id="@+id/scanFrame"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:background="@drawable/scan_border"/>
+</FrameLayout>
+
+

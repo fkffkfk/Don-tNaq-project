@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="selected_tab_color">@color/colorPrimary</color>
+    <color name="unselected_tab_color">@color/gray</color>
+    <color name="logout">#878789</color>
+    <color name="back_faq">#4D9385FA</color>
+    <color name="colorPrimary">#6A60FA</color>
+    <color name="text_primary">@color/graph_purple</color>
+
+    <color name="history">#FAB863</color>
+    <color name="history_light">#808080</color>
+    <color name="gray">#808080</color>
+    <color name="blue">#2196F3</color>
+    <color name="graph_purple">#A00026D0</color>
+    <color name="bg_gr">#55EBEBEB</color>
+
+    <color name="bg_start">#EED3FD</color>
+    <!--#8598ED -->
+    <color name="bg_center">#EED3FD</color>
+    <!--#8598ED -->
+    <color name="bg_end">#E6E6E6</color>
+
+    <color name="star">#9DDFFD</color>
+
+    <color name="board_text">#000000</color>
+    <color name="text_color">#666666</color>
+</resources>

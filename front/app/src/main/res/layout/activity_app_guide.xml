@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/textIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="앱 가이드"
+        android:textSize="18dp"
+        android:padding="18dp"/>
+
+    <!-- 1. QR코드 스캔하기 -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="false"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:id="@+id/q1_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/q1_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/q1_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="QR코드 스캔하기"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/q1_chevron"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    app:srcCompat="@drawable/ic_arrow_drop_down"
+                    app:tint="@color/selected_tab_color"
+                    android:contentDescription="펼치기" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/q1_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginVertical="6dp"
+                android:background="?attr/colorOutline"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/q1_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/scan_guide" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <!-- 2. QR 생성하기-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="false"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:id="@+id/q2_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/q2_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/q2_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="QR생성하기"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/q2_chevron"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    app:srcCompat="@drawable/ic_arrow_drop_down"
+                    app:tint="@color/selected_tab_color"
+                    android:contentDescription="펼치기" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/q2_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginVertical="6dp"
+                android:background="?attr/colorOutline"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/q2_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/create_guide" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <!-- 3. 게시판-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="false"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:id="@+id/q3_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/q3_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/q3_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="게시판+즐겨찾기"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/q3_chevron"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    app:srcCompat="@drawable/ic_arrow_drop_down"
+                    app:tint="@color/selected_tab_color"
+                    android:contentDescription="펼치기" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/q3_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginVertical="6dp"
+                android:background="?attr/colorOutline"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/q3_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/scan_guide" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <!-- 4. QR 생성기록-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="false"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:id="@+id/q4_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/q4_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/q4_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="QR생성기록"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/q4_chevron"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    app:srcCompat="@drawable/ic_arrow_drop_down"
+                    app:tint="@color/selected_tab_color"
+                    android:contentDescription="펼치기" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/q4_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginVertical="6dp"
+                android:background="?attr/colorOutline"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/q4_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/histcreate_guide" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <!-- 5. 통계-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="false"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:id="@+id/q5_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/q5_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/q5_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="통계"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/q5_chevron"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    app:srcCompat="@drawable/ic_arrow_drop_down"
+                    app:tint="@color/selected_tab_color"
+                    android:contentDescription="펼치기" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/q5_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginVertical="6dp"
+                android:background="?attr/colorOutline"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/q5_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/history_guide" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <!-- 6. 로그아웃+탈퇴-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:cardUseCompatPadding="false"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:id="@+id/q6_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/q6_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/q6_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="로그아웃+탈퇴"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/q6_chevron"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    app:srcCompat="@drawable/ic_arrow_drop_down"
+                    app:tint="@color/selected_tab_color"
+                    android:contentDescription="펼치기" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/q6_divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginVertical="6dp"
+                android:background="?attr/colorOutline"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/q6_answer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/logout_guide" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</LinearLayout>

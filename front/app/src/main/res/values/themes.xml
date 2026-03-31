@@ -1,0 +1,31 @@
+<resources>
+
+    <!-- 앱 최종 테마 -->
+    <style name="Theme.QRcode" parent="Base.Theme.QRcode">
+        <!-- 상태바/네비게이션바 색상 -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/white</item>
+    </style>
+
+    <!-- 기본 색상/툴바 색상 정의 -->
+    <style name="Base.Theme.QRcode" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- 앱 창 전체 배경색 -->
+        <item name="android:windowBackground">@drawable/bg</item>
+        <!-- 위젯이 참조하는 논리적 배경색-->
+        <item name="android:colorBackground">@color/white</item>
+
+        <!--텍스트 색-->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- ✅ 툴바/카드 같은 표면은 흰색 -->
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+
+    </style>
+
+
+
+</resources>

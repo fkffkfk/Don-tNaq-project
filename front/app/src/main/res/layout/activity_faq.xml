@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/guide_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/faq_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:animateLayoutChanges="true">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/faq_intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="자주 묻는 질문(FAQ)을 확인해 보세요."
+            android:textColor="@color/text_color"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
+        <!-- 공통 카드 스타일 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:strokeWidth="0dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="false"
+            app:cardBackgroundColor="@color/back_faq"
+            app:strokeColor="@color/back_faq"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:id="@+id/item1_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/back_faq"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:id="@+id/item1_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:id="@+id/item1_question"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Q. 자동로그인은 안 되나요?"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/item1_chevron"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        app:srcCompat="@drawable/ic_arrow_drop_down"
+                        app:tint="@color/selected_tab_color"
+                        android:contentDescription="펼치기" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/item1_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="?attr/colorOutline"
+                    android:visibility="gone" />
+
+
+                <TextView
+                    android:id="@+id/item1_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="설정 > 자동로그인 스위치 활성화하시면 됩니다." />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 항목 2 (같은 스타일로 통일) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:strokeWidth="0dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="false"
+            app:cardBackgroundColor="@color/back_faq"
+            app:strokeColor="@color/back_faq"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:id="@+id/item2_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/back_faq"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:id="@+id/item2_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:id="@+id/item2_question"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Q. 탈퇴하기 방법 알려주세요"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/item2_chevron"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        app:srcCompat="@drawable/ic_arrow_drop_down"
+                        app:tint="@color/selected_tab_color"
+                        android:contentDescription="펼치기" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/item2_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="?attr/colorOutline"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/item2_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:paddingTop="8dp"
+                    android:text="설정 > 하단 맨 아래 위치해 있습니다." />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 항목 3 (같은 스타일로 통일) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:strokeWidth="0dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="false"
+            app:cardBackgroundColor="@color/back_faq"
+            app:strokeColor="@color/back_faq"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:id="@+id/item3_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/back_faq"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:id="@+id/item3_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:id="@+id/item3_question"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Q. 큐아리는 성별이 뭔가요?"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/item3_chevron"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        app:srcCompat="@drawable/ic_arrow_drop_down"
+                        app:tint="@color/selected_tab_color"
+                        android:contentDescription="펼치기" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/item3_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="?attr/colorOutline"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/item3_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:paddingTop="8dp"
+                    android:text="성별 따로 없습니다:D" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 항목 4 (같은 스타일로 통일) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:strokeWidth="0dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="false"
+            app:cardBackgroundColor="@color/back_faq"
+            app:strokeColor="@color/back_faq"
+            app:cardCornerRadius="16dp">
+
+            <LinearLayout
+                android:id="@+id/item4_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/back_faq"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:id="@+id/item4_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:id="@+id/item4_question"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Q. 그 외 문의는?"
+                        android:textStyle="bold"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/item4_chevron"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        app:srcCompat="@drawable/ic_arrow_drop_down"
+                        app:tint="@color/selected_tab_color"
+                        android:contentDescription="펼치기" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/item4_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="?attr/colorOutline"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/item4_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:paddingTop="8dp"
+                    android:text="낚낚시꾼 이메일로 문의주시면 빠른 답변 보내드립니다.\ndiducry21@gmail.com" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

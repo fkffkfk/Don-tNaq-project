@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_setting"
+        android:title="설정" />
+    <item
+        android:id="@+id/nav_intro"
+        android:title="앱소개" />
+    <item
+        android:id="@+id/nav_guide"
+        android:title="앱 가이드" />
+    <item
+        android:id="@+id/nav_tip"
+        android:title="게시판 즐겨찾기" />
+    <item
+        android:id="@+id/nav_qr_history"
+        android:title="QR코드 생성 기록" />
+    <item
+        android:id="@+id/nav_enquiry"
+        android:title="문의사항" />
+</menu>
