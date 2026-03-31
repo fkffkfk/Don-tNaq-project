@@ -1,0 +1,23 @@
+# --- Core numerical stack ---
+numpy==2.1.3
+pandas==2.2.3
+scikit-learn==1.7.2
+joblib==1.4.2
+
+# --- Ensemble libs ---
+xgboost==2.1.0
+lightgbm==4.3.0
+catboost==1.2.5
+
+# --- Networking / parsing for features ---
+dnspython==2.6.1
+tldextract==5.1.2
+python-whois==0.8.0
+idna==3.7
+
+# --- TLS / X.509 ---
+cryptography==42.0.7
+
+# --- Web / DB (사용 중이면) ---
+Flask==3.0.3
+mysql-connector-python==8.4.0

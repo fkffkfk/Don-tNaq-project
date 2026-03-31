@@ -1,0 +1,43 @@
+{
+  "weights": [
+    6,
+    2,
+    5,
+    4
+  ],
+  "thresholds": {
+    "default": 0.555,
+    "risk": 0.47
+  },
+  "risk_flags": [
+    "is_untrusted_ca",
+    "is_weak_protocol",
+    "is_weak_key_algo",
+    "is_expired",
+    "domain_cn_mismatch",
+    "is_self_signed",
+    "DNS_mal"
+  ],
+  "risk_min_hits": 2,
+  "required_features": [
+    "check_https",
+    "check_keyword",
+    "url_length",
+    "specialchar_count",
+    "countletter",
+    "ttl",
+    "ns_match",
+    "dns_query_success",
+    "DNS_mal",
+    "is_untrusted_ca",
+    "is_weak_protocol",
+    "is_weak_key_algo",
+    "is_short_lived_cert",
+    "is_expired",
+    "domain_cn_mismatch",
+    "is_self_signed",
+    "san_count_high"
+  ],
+  "model_version": "ens-1021-v1-fixed",
+  "note": "RF+XGB+LGB+CAT soft voting; FIXED thresholds (default=0.555, risk=0.470)"
+}
