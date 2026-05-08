@@ -137,7 +137,7 @@ don-t_nakk/
         ├── Settings/             # 설정, 인증 QR 관리
         └── auth/                 # 로그인/회원가입
 
-```
+
 ※ 백엔드 서버 코드는 [backend 브랜치](../../tree/backend)에 있습니다.
 
 **Backend 브랜치 구조 (`back/`)**
