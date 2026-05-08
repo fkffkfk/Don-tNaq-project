@@ -137,48 +137,72 @@ don-t_nakk/
         ├── Settings/             # 설정, 인증 QR 관리
         └── auth/                 # 로그인/회원가입
 
+```
+
 ※ 백엔드 서버 코드는 [backend 브랜치](../../tree/backend)에 있습니다.
 
 **Backend 브랜치 구조 (`back/`)**
-
-```
-back/
-├── app.py                    # Flask 앱 진입점, Blueprint 등록, 보안 헤더 설정
-├── config.py / db.py         # 환경변수 기반 설정, DB 연결
-├── limiter_config.py         # Rate Limiting (Redis + fixed-window)
-├── cache_config.py           # 캐시 설정
-├── error_handler.py          # 전역 예외 처리
-├── mail_utils.py             # 이메일 인증 발송
-├── feature_module.py         # URL 특징 추출 클래스
-├── feature_extractor.py      # FeatureExtractor 통합
-│
-├── [*_api.py]                # API Blueprint
-│   ├── user_api.py           # 회원가입, 로그인, 이메일 인증, 회원탈퇴
-│   ├── scan_api.py           # QR 스캔 기록 생성/조회 (Rate limit: 10/min)
-│   ├── model_api.py          # ML 모델 예측 API
-│   ├── qr_api.py             # QR코드 관련 API
-│   ├── qr_secure_api.py      # ECDSA 서명 검증 + 인증 QR 처리
-│   ├── stats_api.py          # 스캔 통계 API
-│   ├── posts_api.py          # 게시판 API
-│   └── upload_api.py         # 이미지 업로드 API
-│
-├── services/                 # 비즈니스 로직 레이어
-│   ├── user_service.py
-│   ├── scan_service.py
-│   ├── model_service.py
-│   ├── qr_service.py
-│   └── stats_service.py
-│
-└── utils/
-    ├── blacklist.py          # SHA-256 해시 기반 URL 블랙리스트 조회
-    ├── whitelist.py          # 신뢰 도메인 화이트리스트 + Open Redirect 방어
-    ├── cache.py              # 캐시 유틸
-    ├── db_helpers.py
-    └── response.py           # 공통 응답 포맷
-```
-```
-
+back/                       # Flask 서버 루트
+    │
+    ├── app.py                  # Flask 앱 초기화, Blueprint 등록, CORS 설정
+    ├── config.py               # 환경 설정
+    ├── cache_config.py         # 캐시 설정
+    ├── limiter_config.py       # Rate limiter 설정
+    ├── db.py                   # DB 연결
+    ├── error_handler.py        # 에러 핸들러
+    ├── hash.py                 # 해시 유틸
+    ├── mail_utils.py           # 이메일 유틸
+    ├── requirements.txt        # 의존성 패키지
+    │
+    ├── feature_module.py       # 특징 추출 모듈
+    ├── feature_extractor.py    # 특징 통합 추출기
+    │
+    ├── *_api.py                # 라우터 (Blueprint)
+    │   ├── scan_api.py         # URL 스캔 엔드포인트
+    │   ├── qr_api.py           # QR 코드 엔드포인트
+    │   ├── qr_secure_api.py    # 인증 QR 엔드포인트
+    │   ├── user_api.py         # 유저 관련 엔드포인트
+    │   ├── upload_api.py       # 파일 업로드 엔드포인트
+    │   ├── posts_api.py        # 게시판 엔드포인트
+    │   ├── stats_api.py        # 통계 엔드포인트
+    │   └── model_api.py        # 모델 직접 호출 엔드포인트
+    │
+    ├── services/               # 비즈니스 로직
+    │   ├── model_service.py    # ML 추론 로직
+    │   ├── scan_service.py     # 스캔 처리
+    │   ├── qr_service.py       # QR 처리
+    │   ├── user_service.py     # 유저 처리
+    │   └── stats_service.py    # 통계 처리
+    │
+    ├── utils/                  # 공통 유틸
+    │   ├── blacklist.py        # 블랙리스트 관리
+    │   ├── whitelist.py        # 화이트리스트 관리
+    │   ├── cache.py            # 캐시 헬퍼
+    │   ├── db_helpers.py       # DB 헬퍼
+    │   └── response.py         # 응답 포맷터
+    │
+    ├── tools/
+    │   └── phishtank_import_local.py   # PhishTank 데이터 로컬 임포트
+    │
+    ├── 🤖 ML 모델 파일
+    │   ├── ens_1021_cat.pkl
+    │   ├── ens_1021_lgb.pkl
+    │   ├── ens_1021_xgb.pkl
+    │   ├── ens_1021_config.json
+    │   └── *_feature_params.pkl
+    │
+    ├── static/
+    │   ├── css/style.css
+    │   └── uploads/            # 업로드 이미지 저장소
+    │
+    └── templates/              # Jinja2 HTML 템플릿
+        ├── base.html
+        ├── index.html
+        ├── student.html
+        ├── verify_success.html
+        └── verify_fail.html
 <br>
+
 
 ## 🔐 보안 구현 포인트
 
